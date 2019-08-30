@@ -4,4 +4,4 @@ git clone xxx myproject
 
 cd myproject
 
-`fin init` will install a Laravel site and set up MySQL connection details.
+`fin init` will install a craft site then access url/admin to install
