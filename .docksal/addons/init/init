@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Console colors
+red='\033[0;91m'
+red_bg='\033[101m'
+yellow_bg='\033[43;90m'
+green='\033[0;32m'
+green_bg='\033[42m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+CRAFT_ROOT="craft"
+
+# ---------- Runtime ------------
+
+if [ -d "$PROJECT_ROOT/$CRAFT_ROOT" ]; then
+  echo -e "${yellow}Directory exists${NC}: $PROJECT_ROOT/$CRAFT_ROOT"
+  echo "Delete this directory and start Craft installation?"
+  echo "Press Enter to delete it and continue or Ctrl-C to cancel..."
+  read -p ""
+fi
+
+rm -r "$PROJECT_ROOT/$CRAFT_ROOT" 2>/dev/null
+
+# Reset containers
+fin reset -f
+
+# Require installer
+fin exec composer create-project craftcms/craft 
+
+#cp "$ADDON_ROOT/.env" "$PROJECT_ROOT/$CRAFT_ROOT/.env"
+#fin exec craft/craft install
+
+
+echo "------------------------------------"
+echo -e "${green}Installation complete.${NC}"
+echo -e "  URL: ${yellow}http://$VIRTUAL_HOST${NC}"
